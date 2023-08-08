@@ -77,7 +77,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             return
         api_hash = api_hash_msg.text
     if not is_bot:
-        t = "⎆ يـرجـى إرسـال رقـم هاتفـك مـع رمـز الدولةn/ مثــال 📱: +96279702387"
+        t = "**⎆ يـرجـى إرسـال رقـم هاتفـك مـع رمـز الدولةn/ مثــال 📱: +96279702387**"
     else:
         t = "⎆ ** يرجـى إرسـال توكـن بوتـكn/مثــال ⭐ : 5396274279:hshhshshshshss`'**"
     phone_number_msg = await bot.ask(user_id, t, filters=filters.text)
@@ -105,10 +105,10 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             else:
                 code = await client.send_code(phone_number)
     except (ApiIdInvalid, ApiIdInvalidError):
-        await msg.reply("⎆ الأيبـي أيـدي والأيبـي هـاش غير صالحـانn/أعد استخـراج الجلسـة مرة أخـرى .", reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply("**⎆ الأيبـي أيـدي والأيبـي هـاش غير صالحـانn/أعد استخـراج الجلسـة مرة أخـرى .**", reply_markup=InlineKeyboardMarkup(gen_button))
         return
     except (PhoneNumberInvalid, PhoneNumberInvalidError):
-        await msg.reply("⎆ رقـم الهـاتف الذي أرسلـته غير صالحn/ أعد استخـراج الجلسة مـرة أخـرى .", reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply("**⎆ رقـم الهـاتف الذي أرسلـته غير صالحn/ أعد استخـراج الجلسة مـرة أخـرى .**", reply_markup=InlineKeyboardMarkup(gen_button))
         return
     try:
         phone_code_msg = None
@@ -134,9 +134,9 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             return
         except (SessionPasswordNeeded, SessionPasswordNeededError):
             try:
-                two_step_msg = await bot.ask(user_id, "** ⎆ يـرجـى إرسـال التحقق الخـاص بحسـابك ..", filters=filters.text, timeout=300)
+                two_step_msg = await bot.ask(user_id, "** ⎆ يـرجـى إرسـال التحقق الخـاص بحسـابك ..**", filters=filters.text, timeout=300)
             except TimeoutError:
-                await msg.reply("⎆ انقضـت المدةn/ أعـد استخـراج الجلسـة مـرة أخـرى .", reply_markup=InlineKeyboardMarkup(gen_button))
+                await msg.reply("**⎆ انقضـت المدةn/ أعـد استخـراج الجلسـة مـرة أخـرى .**", reply_markup=InlineKeyboardMarkup(gen_button))
                 return
             try:
                 password = two_step_msg.text
@@ -147,7 +147,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
                 if await cancelled(api_id_msg):
                     return
             except (PasswordHashInvalid, PasswordHashInvalidError):
-                await two_step_msg.reply("» ᴛʜᴇ ᴩᴀssᴡᴏʀᴅ ʏᴏᴜ'ᴠᴇ sᴇɴᴛ ɪs ᴡʀᴏɴɢ.\n\nᴩʟᴇᴀsᴇ sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
+                await two_step_msg.reply("» التحقـق بخطوتيـن الخـاص بـك غيـر صـالح.\n\nيرجـى إعـادة استخـراج الجلسـة مـرة أخـرى.", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
                 return
     else:
         if telethon:
