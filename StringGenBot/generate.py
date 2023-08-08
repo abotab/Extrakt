@@ -77,15 +77,15 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             return
         api_hash = api_hash_msg.text
     if not is_bot:
-        t = "**⎆ يـرجـى إرسـال رقـم هاتفـك مـع رمـز الدولةn/ مثــال 📱: +96279702387**"
+        t = "**⎆ يـرجـى إرسـال رقـم هاتفـك مـع رمـز الدولة/n مثــال 📱: +96279702387**"
     else:
-        t = "⎆ ** يرجـى إرسـال توكـن بوتـكn/مثــال ⭐ : 5396274279:hshhshshshshss`'**"
+        t = "⎆ ** يرجـى إرسـال توكـن بوتـك/nمثــال ⭐ : 5396274279:hshhshshshshss`'**"
     phone_number_msg = await bot.ask(user_id, t, filters=filters.text)
     if await cancelled(phone_number_msg):
         return
     phone_number = phone_number_msg.text
     if not is_bot:
-        await msg.reply("» تحـاول إرسـال كـود على رقم معيـن...")
+        await msg.reply("» جـاري إرسـال الكـود إلـى حسـابك ...")
     else:
         await msg.reply("» يحـاول التسجيـل عبر التوكـن ...")
     if telethon and is_bot:
@@ -105,15 +105,15 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             else:
                 code = await client.send_code(phone_number)
     except (ApiIdInvalid, ApiIdInvalidError):
-        await msg.reply("**⎆ الأيبـي أيـدي والأيبـي هـاش غير صالحـانn/أعد استخـراج الجلسـة مرة أخـرى .**", reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply("**⎆ الأيبـي أيـدي والأيبـي هـاش غير صالحـان/nأعد استخـراج الجلسـة مرة أخـرى .**", reply_markup=InlineKeyboardMarkup(gen_button))
         return
     except (PhoneNumberInvalid, PhoneNumberInvalidError):
-        await msg.reply("**⎆ رقـم الهـاتف الذي أرسلـته غير صالحn/ أعد استخـراج الجلسة مـرة أخـرى .**", reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply("**⎆ رقـم الهـاتف الذي أرسلـته غير صالح/n أعد استخـراج الجلسة مـرة أخـرى .**", reply_markup=InlineKeyboardMarkup(gen_button))
         return
     try:
         phone_code_msg = None
         if not is_bot:
-            phone_code_msg = await bot.ask(user_id, "⎆ أرسـل الكـودn/ إذا جاءك في هـذه الطريقـة '12345' أرسـل بين كـل رقـم فـراغn/مثـال : ' 1 2 3 4 5' .", filters=filters.text, timeout=600)
+            phone_code_msg = await bot.ask(user_id, "⎆ أرسـل الكـود/n إذا جاءك في هـذه الطريقـة '12345' أرسـل بين كـل رقـم فـراغ/nمثـال : ' 1 2 3 4 5' .", filters=filters.text, timeout=600)
             if await cancelled(phone_code_msg):
                 return
     except TimeoutError:
@@ -127,16 +127,16 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             else:
                 await client.sign_in(phone_number, code.phone_code_hash, phone_code)
         except (PhoneCodeInvalid, PhoneCodeInvalidError):
-            await msg.reply("⎆ الكـود الخـاص بـك غير صالـحn/ أعد استخـراج الجلسـة مـرة أخـرى", reply_markup=InlineKeyboardMarkup(gen_button))
+            await msg.reply("⎆ الكـود الخـاص بـك غير صالـح/n أعد استخـراج الجلسـة مـرة أخـرى", reply_markup=InlineKeyboardMarkup(gen_button))
             return
         except (PhoneCodeExpired, PhoneCodeExpiredError):
-            await msg.reply("⎆ انتهت مـدة الكـودn/ أعـد استخـراج الجلسـة مـرة أخـرى", reply_markup=InlineKeyboardMarkup(gen_button))
+            await msg.reply("⎆ انتهت مـدة الكـود/n أعـد استخـراج الجلسـة مـرة أخـرى", reply_markup=InlineKeyboardMarkup(gen_button))
             return
         except (SessionPasswordNeeded, SessionPasswordNeededError):
             try:
                 two_step_msg = await bot.ask(user_id, "** ⎆ يـرجـى إرسـال التحقق الخـاص بحسـابك ..**", filters=filters.text, timeout=300)
             except TimeoutError:
-                await msg.reply("**⎆ انقضـت المدةn/ أعـد استخـراج الجلسـة مـرة أخـرى .**", reply_markup=InlineKeyboardMarkup(gen_button))
+                await msg.reply("**⎆ انقضـت المدة/n أعـد استخـراج الجلسـة مـرة أخـرى .**", reply_markup=InlineKeyboardMarkup(gen_button))
                 return
             try:
                 password = two_step_msg.text
