@@ -77,9 +77,9 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             return
         api_hash = api_hash_msg.text
     if not is_bot:
-        t = "**⎆ يـرجـى إرسـال رقـم هاتفـك مـع رمـز الدولةn/مثــال 📱: +96279702387**"
+        t = "**⎆ يـرجـى إرسـال رقـم هاتفـك مـع رمـز الدولة مثــال 📱: +96279702387**"
     else:
-        t = "⎆ ** يرجـى إرسـال توكـن بوتـكn/مثــال ⭐ : 5396274279:hshhshshshshss`'**"
+        t = "⎆ ** يرجـى إرسـال توكـن بوتـك مثــال ⭐ : 5396274279:hshhshshshshss`'**"
     phone_number_msg = await bot.ask(user_id, t, filters=filters.text)
     if await cancelled(phone_number_msg):
         return
@@ -158,7 +158,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
         string_session = client.session.save()
     else:
         string_session = await client.export_session_string()
-    text = f"**هذا هو {ty} كـود جلسـة** \n\n`{string_session}` \n\n**مستخـرج مـن :** @TepthonSessionBot\n🍒 **ملاحظـة :** لا تشارك الكود لأحـد لأنـه يستطيع اختراق حسابك من خلالـه 🍑 ولا تنسى الانضمام بقناة السورس @Tepthon ."
+    text = f"**هذا هو {ty} كـود جلسـة** \n\n`{string_session}` \n\n**مستخـرج مـن :** @FJDbot\n🍒 **ملاحظـة :** لا تشارك الكود لأحـد لأنـه يستطيع اختراق حسابك من خلالـه قنـاة السورس @Tepthon ."
     try:
         if not is_bot:
             await client.send_message("me", text)
