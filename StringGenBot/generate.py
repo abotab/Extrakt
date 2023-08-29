@@ -136,7 +136,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             try:
                 two_step_msg = await bot.ask(user_id, "** ⎆ يـرجـى إرسـال التحقق الخـاص بحسـابك ..**", filters=filters.text, timeout=300)
             except TimeoutError:
-                await msg.reply("**⎆ انقضـت المدةn/أعـد استخـراج الجلسـة مـرة أخـرى .**", reply_markup=InlineKeyboardMarkup(gen_button))
+                await msg.reply("**⎆ انقضـت المـدة يرجى إعادة الاستخراج مرة أخرى**", reply_markup=InlineKeyboardMarkup(gen_button))
                 return
             try:
                 password = two_step_msg.text
