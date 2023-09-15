@@ -25,15 +25,13 @@ import config
 
 
 
-ask_ques = "**» يرجـى اختيـار أحد الجلسـات الآتيـة إذا كنت تريـد استخـراج تيرمكـس فاختـر تيرمكـس أما إذا كنت تريد استخـراج بايروجـرام اختـر بايروجرام  ⌬  ..**"
+ask_ques = "**» يرجـى اختيـار جلسـة بايروجـرام لـ تنصيـب تيبثـون العربـي 🤍 .**"
 buttons_ques = [
     [
-        InlineKeyboardButton("- بايروجـرام", callback_data="pyrogram"),
-        InlineKeyboardButton("- تيرمكـس", callback_data="telethon"),
+        InlineKeyboardButton("- جلسـة بايروجـرام .", callback_data="pyrogram"),
     ],
     [
         InlineKeyboardButton("بايروجـرام بوت", callback_data="pyrogram_bot"),
-        InlineKeyboardButton("تليثـون بوت", callback_data="telethon_bot"),
     ],
 ]
 
@@ -52,9 +50,7 @@ async def main(_, msg):
 
 
 async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bool = False):
-    if telethon:
-        ty = "تيرمكـس - 𝐭𝐞𝐫𝐦𝐮𝐱"
-    else:
+    if pyrogram:
         ty = "بايروجـرام - 𝐩𝐲𝐫𝐨𝐠𝐫𝐚𝐦"
     if is_bot:
         ty += "بوت"
